@@ -40,17 +40,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		#calculate pitch.
 		#Going up one full step per indent level.
 		chords = [1, 1.125, 1.25, 1.33, 1.5, 1.666, 1.875]
-		log.debug(fundemental)
 		lev = (level) %7 #notes on this octave can be found by multiplying fundemental by the correct index.!
-		log.debug(lev)
 		note = chords[lev]*fundemental #NVDA never passes us a blank string.
 		#calculate stereo values. NVDA expects  values between 0 and 100 for stereo volume for each channel.
 		right = int((50/MAX_LEVEL)*level)
-		log.debug(right)
-		noStereo = False
 		left = 50-right
-		log.debug(left)
-		log.debug(right)
 		tones.beep(note, 80, left=left, right=right)
 		return level
 
@@ -73,7 +67,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		toneify = re.sub(r" {1,4}", r"\t", toneify)
 		#if self._detectIndentChange(toneify):
 		level = self._reportIndentChange(toneify)
-		return self.oldSpeech(indent)
+		if level >= MAX_LEVEL:
+			return self.oldSpeech(indent)
+		elif hasChanged: #there is more than one type of character that makes up these indents. We probably should speak it since tones alone can't do it.
+			return self.oldSpeech(indent)
+		else:
+			return "" #the tone has us covered.
+
 
 
 #The following lines encode 3 octaves of a C major scale. This shows off the entire range this plugin can support.

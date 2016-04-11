@@ -34,16 +34,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if level >= MAX_LEVEL:
 			return level
 		volume = speech.getSynth().volume
-		lev = level
-		fundemental = 128
-		while  lev >= 7:
-			fundemental *=2 #increase the fundemental frequency by one octave so that we play the note in the correct octave.
-			lev -= 7
-		#calculate pitch.
-		#Going up one full step per indent level.
-		chords = [1, 1.125, 1.25, 1.33, 1.5, 1.666, 1.875]
-		lev = (level) %7 #notes on this octave can be found by multiplying fundemental by the correct index.!
-		note = chords[lev]*fundemental #NVDA never passes us a blank string.
+		note = 128*2**(level/((MAX_LEVEL)/4.0))
 		#calculate stereo values. NVDA expects  values between 0 and 100 for stereo volume for each channel.
 		right = int((volume/(MAX_LEVEL-1))*level)
 		left = volume-right

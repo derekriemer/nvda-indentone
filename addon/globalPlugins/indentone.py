@@ -15,7 +15,7 @@ from NVDAObjects.IAccessible.scintilla import Scintilla
 from NVDAObjects.behaviors import EditableText
 from logHandler import log
 
-MAX_LEVEL = 22.0
+MAX_LEVEL = 18.0
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	
 	def __init__(self, *args, **kwargs):
@@ -31,14 +31,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		@returns: Indent level.
 		"""
 		level = len(text) #assume 1 indent unit per character.
-		if level >= MAX_LEVEL:
+		if level > MAX_LEVEL:
 			return level
 		volume = speech.getSynth().volume
-		note = 128*2**(level/((MAX_LEVEL)/4.0))
+		note = 128*2**(level/MAX_LEVEL*3) #MAX_LEVEL*3 gives us 3 octaves of whole tones.
 		#calculate stereo values. NVDA expects  values between 0 and 100 for stereo volume for each channel.
 		right = int((volume/(MAX_LEVEL-1))*level)
 		left = volume-right
-		log.debug("{} && {} || {}".format(volume, left,right))
 		tones.beep(note, 80, left=left, right=right)
 		return level
 
@@ -58,10 +57,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				#it's different. break it all here.
 				hasChanged = True
 				break
-		toneify = re.sub(r" {1,4}", r"\t", toneify)
+			toneify = re.sub(r" {1,4}", r"\t", toneify)
 		#if self._detectIndentChange(toneify):
 		level = self._reportIndentChange(toneify)
-		if level >= MAX_LEVEL:
+		if level > MAX_LEVEL:
 			return self.oldSpeech(indent)
 		elif hasChanged: #there is more than one type of character that makes up these indents. We probably should speak it since tones alone can't do it.
 			return self.oldSpeech(indent)
@@ -70,7 +69,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 
 
- #The following lines encode 3 octaves of a C major scale. This shows off the entire range this plugin can support.
+ #The following lines can be used as a testing grounds.
 
 	
 		
@@ -94,67 +93,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 																				
 																					
 																						
-#The following lines encode Ode to joy in indent language. You'll have to be clever to hear it. 
-									
-									
-										
-											
-											
-										
-									
-								
-							
-							
-								
-									
-									
-								
-								
-									
-									
-										
-											
-											
-										
-									
-								
-							
-							
-								
-									
-								
-							
-							
-								
-								
-									
-							
-								
-									
-										
-									
-							
-								
-									
-										
-									
-								
-							
-								
-				
-									
-									
-									
-										
-											
-											
-										
-									
-								
-							
-							
-								
-									
-								
-							
-							
+																							
+																								
+																									
+																										
+																											
+																												

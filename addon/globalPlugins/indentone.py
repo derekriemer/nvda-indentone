@@ -41,7 +41,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			lev -= 7
 		#calculate pitch.
 		#Going up one full step per indent level.
-		chords = [1, 1.125, 1.25, 1.33, 1.5, 1.666, 1.875]
+		chords = [1, 1.125, 1.20, 1.33, 1.5, 1.60, 1.875]
 		lev = (level) %7 #notes on this octave can be found by multiplying fundemental by the correct index.!
 		note = chords[lev]*fundemental #NVDA never passes us a blank string.
 		#calculate stereo values. NVDA expects  values between 0 and 100 for stereo volume for each channel.

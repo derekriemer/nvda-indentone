@@ -23,6 +23,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.oldSpeech = speech.getIndentationSpeech
 		speech.getIndentationSpeech = self.myIndent
 
+
 	def _reportIndentChange(self, text):
 		""" Reports the current level change as a tone. The first twenty levels are given distinct stereo positions, and otherwise, no tone will play.
 		@var text: The text to report indents for. Only pass a homoginous set of tabs or spaces, because the length is calculated assuming each character is one indent unit.
@@ -32,6 +33,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		level = len(text) #assume 1 indent unit per character.
 		if level >= MAX_LEVEL:
 			return level
+		volume = speech.getSynth().volume
 		lev = level
 		fundemental = 128
 		while  lev >= 7:
@@ -43,8 +45,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		lev = (level) %7 #notes on this octave can be found by multiplying fundemental by the correct index.!
 		note = chords[lev]*fundemental #NVDA never passes us a blank string.
 		#calculate stereo values. NVDA expects  values between 0 and 100 for stereo volume for each channel.
-		right = int((50/MAX_LEVEL)*level)
-		left = 50-right
+		right = int((volume/(MAX_LEVEL-1))*level)
+		left = volume-right
+		log.debug("{} && {} || {}".format(volume, left,right))
 		tones.beep(note, 80, left=left, right=right)
 		return level
 
@@ -76,7 +79,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 
 
-#The following lines encode 3 octaves of a C major scale. This shows off the entire range this plugin can support.
+ #The following lines encode 3 octaves of a C major scale. This shows off the entire range this plugin can support.
 
 	
 		
@@ -100,22 +103,6 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 																				
 																					
 																						
-																							
-																								
-																									
-																										
-																											
-																												
-																													
-																														
-																															
-																																
-																																	
-																																		
-																																			
-																																				
-																																				
-																																				
 #The following lines encode Ode to joy in indent language. You'll have to be clever to hear it. 
 									
 									

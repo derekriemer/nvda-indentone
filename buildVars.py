@@ -19,7 +19,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("""This addon pans a beep in the stereo field depending on how indented the current line is. The farther the indentation of the text is, the more to your right you will hear a beep. Also, each level of indent that increases, you hear the tone one musical note higher on a musical scale."""),
 	# version
-	"addon_version" : "0.2",
+	"addon_version" : "0.3.0",
 	# Author(s)
 	"addon_author" : u"Derek Riemer <driemer.riemer@gmail.com>",
 	# URL for the add-on documentation support

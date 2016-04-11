@@ -52,13 +52,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				toneify = i
 			elif lchar == i:
 				toneify += i
-				continue
 			else:
 				#it's different. break it all here.
 				hasChanged = True
 				break
-			toneify = re.sub(r" {1,4}", r"\t", toneify)
-		#if self._detectIndentChange(toneify):
+		toneify = re.sub(r" {1,4}", r"\t", toneify)
 		level = self._reportIndentChange(toneify)
 		if level > MAX_LEVEL:
 			return self.oldSpeech(indent)

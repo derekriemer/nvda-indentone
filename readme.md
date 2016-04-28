@@ -17,7 +17,7 @@ When the text is less indented than it was before (assuming it was already inden
 ## Future work.
 
 I may play around with panning the audio dynamically. This would allow me to start the beep at your left, and move it 1 indent unit over a time of about 200 milliseconds. The advantage of this is you could judge the difference in indentation that just occurred, while in parallell hearing the code you are currently editing, even if you don't musically easily judge whole tone steps. 
-I am also probably going to experiment with integrating this into NVDA core (I'm going to open up a ticket about this after finals). I spoke about Indentone at NVDACon 2016 in a session about my add-ons. I received much great feedback, and I am excited to continue work on this. 
+I am also  experimenting with integrating this into NVDA core [Ticket in NVDA](https://github.com/nvaccess/nvda/issues/5906). I spoke about Indentone at NVDACon 2016 in a session about my add-ons. I received much great feedback, and I am excited to continue work on this. 
 ## Downloads:
 ### Download:
 https://files.derekriemer.com/indentone-0.3.0.nvda-addon

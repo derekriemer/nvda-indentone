@@ -1,3 +1,4 @@
+
 # How to use:
 
 ## Installation
@@ -15,5 +16,10 @@ When the text is less indented than it was before (assuming it was already inden
 
 ## Future work.
 
-I may play around with panning the audio dynamically. This would allow me to start the beep at your left, and move it 1 indent unit over a time of about 200 milliseconds. The advantage of this is you could judge the difference in indentation that just occurred, while in parrellell hearing the code you are currently editing. 
-Techhnically, this will probably have to use separate audio libraries, because I do not think tones.beep is going to let me dynamically create an audio buffer. I probably will have to ship something like libaudioverse with this addon to do this, or write a custom library in c++. If anyone knows of the best way I should do this, I would like to talk to you real quick. Especially if you know how I could do it in python without shipping any audio library and using NVDA internals such as NVWave.
+I may play around with panning the audio dynamically. This would allow me to start the beep at your left, and move it 1 indent unit over a time of about 200 milliseconds. The advantage of this is you could judge the difference in indentation that just occurred, while in parallell hearing the code you are currently editing, even if you don't musically easily judge whole tone steps. 
+I am also probably going to experiment with integrating this into NVDA core (I'm going to open up a ticket about this after finals). I spoke about Indentone at NVDACon 2016 in a session about my add-ons. I received much great feedback, and I am excited to continue work on this. 
+## Downloads:
+### Download:
+https://files.derekriemer.com/indentone-0.3.0.nvda-addon
+### Source Code:
+https://github.com/derekriemer/nvda-indentone
